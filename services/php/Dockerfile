@@ -11,7 +11,7 @@ RUN if [ $CONTAINER_PACKAGE_URL ] ; then sed -i "s/dl-cdn.alpinelinux.org/${CONT
 
 COPY ./extensions /tmp/extensions
 WORKDIR /tmp/extensions
-RUN chmod +x install.sh \
+RUN sed -i 's/\r//' install.sh && chmod +x install.sh \
     && sh install.sh
 
 ADD ./extensions/install-php-extensions  /usr/local/bin/
@@ -29,7 +29,7 @@ ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
 
 # Install composer and change it's cache home
-RUN chmod +x install-composer.sh \
+RUN sed -i 's/\r//' install-composer.sh && chmod +x install-composer.sh \
     && sh install-composer.sh \
     && rm -rf /tmp/extensions
 ENV COMPOSER_HOME=/tmp/composer
