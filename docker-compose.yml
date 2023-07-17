@@ -37,8 +37,10 @@ services:
        PHP_EXTENSIONS: ${PHP80_EXTENSIONS}
        TZ: "$TZ"
    container_name: php
-   expose:
-     - 9501
+  #  expose:
+  #    - 8000
+   ports:
+     - "8000:8000"
    volumes:
      - ${SOURCE_DIR}:/www/:rw
      - ${PHP80_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
@@ -93,6 +95,8 @@ services:
       - ${SOURCE_DIR}:/www/:rw
     expose:
       - "8081"
+    ports:
+      - "8081:8081"
     networks:
       - default
     stdin_open: true
